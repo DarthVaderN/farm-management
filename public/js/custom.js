@@ -13,26 +13,25 @@ $(function () {
         });
     }
 
-    function sleep() {
+    function killing() {
         $.ajax({
             url: '/kill',
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-                $('#sheep' + data.sleep.id).hide();
-
+                $('#sheep' + data.kill.id).hide();
                 $('#sheep' + data.moved.id).appendTo('#yard' + data.moved.to);
             }
         });
     }
 
     $('input[type=submit]').on('click', function () {
-        var cmd = $('select').val();
+        let cmd = $('select').val();
 
         if (cmd == 'add') {
             add();
-        } else if (cmd == 'sleep') {
-            sleep();
+        } else if (cmd == 'kill') {
+            killing();
         }
 
         return false;
@@ -51,8 +50,8 @@ $(function () {
         clearInterval(timer);
     });
 
-    var timer = setInterval(function () {
-        var day = localStorage.getItem('day') ? localStorage.getItem('day') : 0;
+    let timer = setInterval(function () {
+        let day = localStorage.getItem('day') ? localStorage.getItem('day') : 0;
         day = parseInt(day) + 1;
         days(day);
 
@@ -61,7 +60,7 @@ $(function () {
         }
 
         if (day % 2 == 0 && day > 0) {
-            sleep();
+            killing();
         }
     }, 10000);
 

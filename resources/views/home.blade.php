@@ -17,18 +17,18 @@
                     </div>
                 @endforeach
             <div class="col-md-6">
-                <form>
+                <div class="panel">
                     <div class="form-group">
                         <button id="delete" class="btn">Сбросить к стандартным настройкам</button>
                     </div>
                     <div class="form-group">
                         <select name="command" id="" class="btn btn-info">
                             <option value="add" >Добавить одну</option>
-                            <option value="sleep">Забанить одну</option>
+                            <option value="kill">Забанить одну</option>
                         </select>
                         <input type="submit" class="btn btn-info" name="send" value="Отправить">
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

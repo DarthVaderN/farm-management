@@ -32,7 +32,7 @@ class ApiController extends Controller
         foreach ( $all as $sheep ) {
             $yard[$sheep->yard][] = $sheep->id;
         }
-//        return response()->json(['yard' => $yard, 'all' => $all],200);
+//      return response()->json(['yard' => $yard, 'all' => $all],200);  response JSON for api
         return view('home',compact('yard','all'));
 
     }
@@ -50,15 +50,15 @@ class ApiController extends Controller
         }
 
         $count = count($randomList);
-        $msg   = json_encode(0);
+        $msg   = 0;
 
         if ( $count > 0 ) {
             $index = (mt_rand(Sheep::MinYard, count($randomList)) - 1);
             $id  = Sheep::add($randomList[$index]);
-            $msg = json_encode(['yard' => $randomList[$index],'sheep_id' => $id]);
+            $msg =['yard' => $randomList[$index],'sheep_id' => $id];
         }
 
-        echo $msg;
+        return response()->json($msg);
     }
 
     public function kill()
@@ -72,17 +72,18 @@ class ApiController extends Controller
     {
         $sheepDelete = Sheep::truncate();
         $recordDelete = Record::truncate();
-        return response()->json([$sheepDelete,$recordDelete],200);
+        return response()->json([$sheepDelete,$recordDelete],204);
     }
 
     public function status()
     {
-        $all   = Sheep::latest()->count();
+        $all   = Sheep::all()->count();
         $live  = Sheep::where('active', 1)->latest()->count();
         $kill = Sheep::where('active', 0)->latest()->count();
         $min = Sheep::select('yard', DB::raw('COUNT(id) as total'))->groupBy('yard')->orderBy('total')->first();
         $max = Sheep::select('yard', DB::raw('COUNT(id) as total'))->groupBy('yard')->orderBy('total', 'desc')->first();
-//        return response()->json([$all,$live,$kill,$max,$min]);
+            // response JSON for api
+//      return response()->json([$all,$live,$kill,$max,$min]); response JSON for api
         return view('status',compact('all','live','kill','min','max'));
     }
 

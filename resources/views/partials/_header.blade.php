@@ -5,7 +5,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="{{ setActive('/') }}"><a href="{{ url('/') }}">Главная</a></li>
-            <li class="{{ setActive('status') }}"><a href="{{ url('/status') }}">Статистика</a></li>
+            <li class="{{ setActive('status') }}"><a href="{{ url('/status') }}">Статистика Овечек</a></li>
         </ul>
     </div>
 </nav>
